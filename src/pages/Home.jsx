@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import ProductCard from '../components/ProductCard';
+import CartButton from './CartButton';
 
 export default class Home extends Component {
   constructor() {
@@ -10,7 +11,12 @@ export default class Home extends Component {
       categoryId: '',
       query: '',
       searched: false,
+      categories: [],
     };
+  }
+
+  componentDidMount() {
+    this.requestCategories();
   }
 
   handleInput = ({ target: { value } }) => {
@@ -37,32 +43,51 @@ export default class Home extends Component {
     return 'Nenhum produto foi encontrado';
   }
 
+  async requestCategories() {
+    const response = await getCategories();
+    this.setState({ categories: response });
+  }
+
   render() {
-    const { query, response, searched } = this.state;
+    const { categories, query, response, searched } = this.state;
     const { results } = response;
     return (
       <div>
-        <input
-          type="text"
-          data-testid="query-input"
-          onChange={ this.handleInput }
-          value={ query }
-        />
-        <button
-          type="submit"
-          data-testid="query-button"
-          onClick={ this.handleSearch }
-        >
-          Pesquisar
-        </button>
-        <h1 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h1>
-        <section id="search-results">
-          { searched
-            ? this.resultsRender(results)
-            : 'Você não realizou uma pesquisa' }
-        </section>
+        <div>
+          <section className="categories">
+            <h4>Categorias</h4>
+            { categories.map(({ name }, i) => (
+              <p key={ i } data-testid="category">{ name }</p>
+            )) }
+          </section>
+          <div>
+            <CartButton />
+            <input
+              type="text"
+              data-testid="query-input"
+              onChange={ this.handleInput }
+              value={ query }
+            />
+            <button
+              type="submit"
+              data-testid="query-button"
+              onClick={ this.handleSearch }
+            >
+              Pesquisar
+            </button>
+            <h1 data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </h1>
+          </div>
+        </div>
+
+        <div>
+          <section id="search-results">
+            { searched
+              ? this.resultsRender(results)
+              : 'Você não realizou uma pesquisa' }
+          </section>
+        </div>
       </div>
     );
   }
