@@ -1,0 +1,14 @@
+.productCard {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.productCard img {
+  max-height: 100px;
+  width: fit-content;
+}
