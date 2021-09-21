@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import CartButton from './CartButton';
@@ -38,12 +39,19 @@ export default class Home extends Component {
   resultsRender = (results) => {
     if (results.length > 0) {
       return results.map((result) => (
-        <ProductCard
+        <Link
+          data-testid="product-detail-link"
+          to={ {
+            pathname: `/ProductDetail/${result.id}`,
+            state: { produto: result } } }
           key={ result.id }
-          price={ result.price }
-          title={ result.title }
-          thumbnail={ result.thumbnail }
-        />
+        >
+          <ProductCard
+            price={ result.price }
+            title={ result.title }
+            thumbnail={ result.thumbnail }
+          />
+        </Link>
       ));
     }
     return 'Nenhum produto foi encontrado';
