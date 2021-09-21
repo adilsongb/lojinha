@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import CartButton from './CartButton';
+import Category from '../components/Category';
 
 export default class Home extends Component {
   constructor() {
@@ -27,6 +28,10 @@ export default class Home extends Component {
     const { categoryId, query } = this.state;
     const result = await getProductsFromCategoryAndQuery(categoryId, query);
     this.setState({ response: result, searched: true });
+  }
+
+  handleCategory = (id) => {
+    this.setState({ categoryId: id }, () => this.handleSearch());
   }
 
   resultsRender = (results) => {
@@ -56,8 +61,13 @@ export default class Home extends Component {
         <div>
           <section className="categories">
             <h4>Categorias</h4>
-            { categories.map(({ name }, i) => (
-              <p key={ i } data-testid="category">{ name }</p>
+            { categories.map(({ name, id }) => (
+              <Category
+                key={ id }
+                name={ name }
+                id={ id }
+                onClick={ this.handleCategory }
+              />
             )) }
           </section>
           <div>
