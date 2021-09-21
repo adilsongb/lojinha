@@ -14,6 +14,7 @@ export default class Home extends Component {
       query: '',
       searched: false,
       categories: [],
+      cart: [],
     };
   }
 
@@ -36,22 +37,35 @@ export default class Home extends Component {
     this.setState({ categoryId: id }, () => this.handleSearch());
   }
 
+  addToCart = (result) => {
+    const { cart } = this.state;
+    this.setState({ cart: [...cart, result] });
+  }
+
   resultsRender = (results) => {
     if (results.length > 0) {
       return results.map((result) => (
-        <Link
-          data-testid="product-detail-link"
-          to={ {
-            pathname: `/ProductDetail/${result.id}`,
-            state: { produto: result } } }
-          key={ result.id }
-        >
-          <ProductCard
-            price={ result.price }
-            title={ result.title }
-            thumbnail={ result.thumbnail }
-          />
-        </Link>
+        <div key={ result.id }>
+          <Link
+            data-testid="product-detail-link"
+            to={ {
+              pathname: `/ProductDetail/${result.id}`,
+              state: { produto: result } } }
+          >
+            <ProductCard
+              price={ result.price }
+              title={ result.title }
+              thumbnail={ result.thumbnail }
+            />
+          </Link>
+          <button
+            data-testid="product-add-to-cart"
+            type="button"
+            onClick={ () => this.addToCart(result) }
+          >
+            Adicionar ao carrinho
+          </button>
+        </div>
       ));
     }
     return 'Nenhum produto foi encontrado';
@@ -63,7 +77,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, query, response, searched } = this.state;
+    const { categories, query, response, searched, cart } = this.state;
     const { results } = response;
     return (
       <div className="container">
@@ -85,7 +99,7 @@ export default class Home extends Component {
               <i className="fas fa-search" />
             </button>
           </form>
-          <CartButton />
+          <CartButton cart={ cart } />
         </header>
 
         <main>
