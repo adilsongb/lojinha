@@ -24,7 +24,8 @@ export default class Home extends Component {
     this.setState({ query: value });
   }
 
-  handleSearch = async () => {
+  handleSearch = async (event) => {
+    if (event) event.preventDefault();
     const { categoryId, query } = this.state;
     const result = await getProductsFromCategoryAndQuery(categoryId, query);
     this.setState({ response: result, searched: true });
@@ -57,8 +58,29 @@ export default class Home extends Component {
     const { categories, query, response, searched } = this.state;
     const { results } = response;
     return (
-      <div>
-        <div>
+      <div className="container">
+        <header>
+          <img src="https://anymarket.com.br/wp-content/uploads/2018/07/images.png" alt="logo-mercado-livre" />
+          <form action="">
+            <input
+              type="text"
+              data-testid="query-input"
+              onChange={ this.handleInput }
+              value={ query }
+              placeholder="Buscar produtos..."
+            />
+            <button
+              type="submit"
+              data-testid="query-button"
+              onClick={ this.handleSearch }
+            >
+              <i className="fas fa-search" />
+            </button>
+          </form>
+          <CartButton />
+        </header>
+
+        <main>
           <section className="categories">
             <h4>Categorias</h4>
             { categories.map(({ name, id }) => (
@@ -70,34 +92,16 @@ export default class Home extends Component {
               />
             )) }
           </section>
-          <div>
-            <CartButton />
-            <input
-              type="text"
-              data-testid="query-input"
-              onChange={ this.handleInput }
-              value={ query }
-            />
-            <button
-              type="submit"
-              data-testid="query-button"
-              onClick={ this.handleSearch }
-            >
-              Pesquisar
-            </button>
-            <h1 data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </h1>
-          </div>
-        </div>
 
-        <div>
-          <section id="search-results">
+          <section className="search-results">
             { searched
               ? this.resultsRender(results)
-              : 'Você não realizou uma pesquisa' }
+              : (
+                <h1 data-testid="home-initial-message">
+                  Digite algum termo de pesquisa ou escolha uma categoria.
+                </h1>) }
           </section>
-        </div>
+        </main>
       </div>
     );
   }
