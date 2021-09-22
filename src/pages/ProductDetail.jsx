@@ -2,17 +2,23 @@ import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CartButton from './CartButton';
+import ProductRating from '../components/ProductRating';
+import ProductComments from '../components/ProductComments';
 
 export default class ProductDetail extends Component {
   constructor() {
     super();
     this.state = {
       cart: [],
+      comments: [],
     };
   }
 
   componentDidMount() {
     this.loadStorage();
+    if (JSON.parse(localStorage.getItem('comments'))) {
+      this.loadComments();
+    }
   }
 
   addToCart = () => {
@@ -33,11 +39,17 @@ export default class ProductDetail extends Component {
     this.setState({ cart: parseStorage });
   }
 
+  loadComments = async () => {
+    const storage = localStorage.getItem('comments');
+    const parseStorage = await JSON.parse(storage);
+    this.setState({ comments: parseStorage });
+  }
+
   render() {
     const { props } = this;
     const { state } = props.location;
     const { produto } = state;
-    const { cart } = this.state;
+    const { cart, comments } = this.state;
     const { id, title, price, thumbnail } = produto;
     return (
       <div>
@@ -55,6 +67,11 @@ export default class ProductDetail extends Component {
           Adicionar ao Carrinho
         </button>
         <CartButton cart={ cart } />
+        <ProductRating />
+        { comments.length > 0 ? comments.map((comment, index) => (<ProductComments
+          key={ index }
+          comment={ comment }
+        />)) : '' }
       </div>
     );
   }
