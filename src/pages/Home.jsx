@@ -20,6 +20,9 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.requestCategories();
+    if (!JSON.parse(localStorage.getItem('cartItens'))) {
+      localStorage.setItem('cartItens', JSON.stringify([]));
+    }
   }
 
   handleInput = ({ target: { value } }) => {
