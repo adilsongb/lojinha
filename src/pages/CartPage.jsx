@@ -3,10 +3,24 @@ import PropTypes from 'prop-types';
 import CartProduct from '../components/CartProduct';
 
 class CartPage extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      cart: [],
+    };
+  }
+
+  componentDidMount() {
+    this.loadCart();
+  }
+
+  loadCart = async () => {
+    const localStorageData = await JSON.parse(localStorage.getItem('cartItens'));
+    this.setState({ cart: localStorageData });
+  }
+
   render() {
-    const { location } = this.props;
-    const { state } = location;
-    const { cart } = state;
+    const { cart } = this.state;
     return (
       <div>
         <h2>Carrinho de Compras</h2>
