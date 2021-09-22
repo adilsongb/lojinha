@@ -22,7 +22,13 @@ export default class Home extends Component {
     this.requestCategories();
     if (!JSON.parse(localStorage.getItem('cartItens'))) {
       localStorage.setItem('cartItens', JSON.stringify([]));
+    } else {
+      this.getCartItens();
     }
+  }
+
+  getCartItens = () => {
+    this.setState({ cart: JSON.parse(localStorage.getItem('cartItens')) });
   }
 
   handleInput = ({ target: { value } }) => {
@@ -40,9 +46,12 @@ export default class Home extends Component {
     this.setState({ categoryId: id }, () => this.handleSearch());
   }
 
-  addToCart = (result) => {
+  addToCart = async (result) => {
     const { cart } = this.state;
-    this.setState({ cart: [...cart, result] });
+    this.setState({ cart: [...cart, result] }, () => {
+      const { cart: updatedCart } = this.state;
+      localStorage.setItem('cartItens', JSON.stringify(updatedCart));
+    });
   }
 
   resultsRender = (results) => {
