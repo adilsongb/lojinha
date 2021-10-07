@@ -4,6 +4,7 @@ import { getProductsFromCategoryAndQuery, getCategories } from '../services/api'
 import ProductCard from '../components/ProductCard';
 import CartButton from './CartButton';
 import Category from '../components/Category';
+import logo from '../logo.png';
 
 export default class Home extends Component {
   constructor() {
@@ -13,6 +14,7 @@ export default class Home extends Component {
       categoryId: '',
       query: '',
       searched: false,
+      loading: false,
       categories: [],
       cart: [],
     };
@@ -38,8 +40,9 @@ export default class Home extends Component {
   handleSearch = async (event) => {
     if (event) event.preventDefault();
     const { categoryId, query } = this.state;
+    this.setState({ loading: true, searched: false });
     const result = await getProductsFromCategoryAndQuery(categoryId, query);
-    this.setState({ response: result, searched: true });
+    this.setState({ response: result, searched: true, loading: false });
   }
 
   handleCategory = (id) => {
@@ -54,10 +57,26 @@ export default class Home extends Component {
     });
   }
 
+  loadingRender = () => {
+    return (
+      <div className="loading">
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    )
+  }
+
   resultsRender = (results) => {
     if (results.length > 0) {
       return results.map((result) => (
-        <div key={ result.id }>
+        <div
+          key={ result.id }
+          className="card"
+        >
           <Link
             data-testid="product-detail-link"
             to={ {
@@ -89,12 +108,12 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, query, response, searched, cart } = this.state;
+    const { categories, query, response, searched, cart, loading } = this.state;
     const { results } = response;
     return (
       <div className="container">
         <header>
-          <img src="https://anymarket.com.br/wp-content/uploads/2018/07/images.png" alt="logo-mercado-livre" />
+          <img src={logo} alt="logo-mercado-livre" />
           <form action="">
             <input
               type="text"
@@ -128,6 +147,8 @@ export default class Home extends Component {
           </section>
 
           <section className="search-results">
+            { loading ? this.loadingRender() : null }
+
             { searched
               ? this.resultsRender(results)
               : (

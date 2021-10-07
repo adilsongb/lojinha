@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CartButton from './CartButton';
 import ProductRating from '../components/ProductRating';
 import ProductComments from '../components/ProductComments';
+import './ProductDetail.css';
 
 export default class ProductDetail extends Component {
   constructor() {
@@ -51,22 +52,39 @@ export default class ProductDetail extends Component {
     const { produto } = state;
     const { cart, comments } = this.state;
     const { id, title, price, thumbnail } = produto;
+
     return (
-      <div>
-        <h1 data-testid="product-detail-name">
-          {title}
-        </h1>
-        <p>{thumbnail}</p>
-        <p>{id}</p>
-        <p>{price}</p>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.addToCart }
-        >
-          Adicionar ao Carrinho
-        </button>
-        <CartButton cart={ cart } />
+      <div className="container-product-details">
+        <div className="header-page-details">
+          <Link to="/">
+            <i className="fas fa-arrow-left"></i>
+            Voltar
+          </Link>
+          <CartButton cart={ cart } />
+        </div>
+
+        <div className="product-detail">
+          <div className="cont-img">
+            <img src={thumbnail} alt="image product" />
+          </div>
+
+          <div>
+            <h1 data-testid="product-detail-name">
+              {title}
+            </h1>
+            <p className="id-product">{id}</p>
+            <p className="price">R$ {price}</p>
+            <button
+              type="button"
+              className="button-add-cart"
+              data-testid="product-detail-add-to-cart"
+              onClick={ this.addToCart }
+            >
+              Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+
         <ProductRating />
         { comments.length > 0 ? comments.map((comment, index) => (<ProductComments
           key={ index }

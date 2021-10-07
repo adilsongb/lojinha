@@ -38,39 +38,49 @@ export default class CartProduct extends Component {
     } = this.props;
     const { count } = this.state;
     return (
-      <div style={ { border: '1px solid black' } }>
-        <img src={ thumbnail } alt="foto-produto" />
-        <h3 data-testid="shopping-cart-product-name">
-          { title }
-        </h3>
-        <h5>{ `A unidade: R$ ${price}` }</h5>
+      <div className="cart-product">
         <button
           type="button"
+          className="button-remove-product"
           onClick={ () => removeProduct(id) }
         >
-          X
+          <i className="fas fa-times" />
         </button>
-        <button
-          type="button"
-          data-testid="product-decrease-quantity"
-          onClick={ () => {
-            decreaseProduct(id, count);
-            this.handleClick();
-          } }
-        >
-          -
-        </button>
-        <h4 data-testid="shopping-cart-product-quantity">{ count }</h4>
-        <button
-          type="button"
-          data-testid="product-increase-quantity"
-          onClick={ () => {
-            increaseProduct(product);
-            this.handleClick(true);
-          } }
-        >
-          +
-        </button>
+        <div className="details-product-cart">
+          <div className="container-img-cart">
+            <img src={ thumbnail } alt="foto-produto" />
+          </div>
+          <h4 className="title-product" data-testid="shopping-cart-product-name">
+            { title }
+          </h4>
+        </div>
+        <div className="count-result-product">
+          <div className="control-product">
+            <button
+              type="button"
+              data-testid="product-decrease-quantity"
+              onClick={ () => {
+                decreaseProduct(id, count);
+                this.handleClick();
+              } }
+            >
+              -
+            </button>
+            <h4 data-testid="shopping-cart-product-quantity">{ count }</h4>
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ () => {
+                increaseProduct(product);
+                this.handleClick(true);
+              } }
+            >
+              +
+            </button>
+          </div>
+          <span className="price-total">{ `R$ ${price * count}` }</span>
+          <span className="price-unit">{ `A unidade: R$ ${price}` }</span>
+        </div>
       </div>
     );
   }

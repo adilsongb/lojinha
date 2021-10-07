@@ -1,3 +1,16 @@
+.card {
+  position: relative;
+}
+
+.card:hover button {
+  display: block;
+}
+
+.card a {
+  text-decoration: none;
+  color: rgb(53, 50, 50);
+}
+
 .productCard {
   align-items: center;
   background-color: white;
@@ -5,15 +18,56 @@
   border-radius: 5px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  height: 300px;
+  height: 150px;
   justify-content: space-between;
+  text-decoration: none;
   margin: 2px;
-  padding: 10px;
-  width: 200px;
 }
 
-.productCard img {
-  max-height: 100px;
-  width: 100%;
+.img-container {
+  background-color: rgb(204, 204, 204);
+  border-radius: 5px 0 0 5px;
+  overflow: hidden;
+  width: 150px;
+  height: 100%;
+}
+
+.img-container img {
+  width: inherit;
+  height: 100%;
+}
+
+.details-container {
+  padding: 0 10px;
+  width: 80%;
+}
+
+.details-container h4 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.details-container span {
+  color: gray;
+  font-size: 16px;
+}
+
+.card button {
+  background-color: rgb(255, 255, 168);
+  border: none;
+  display: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgb(58, 56, 56);
+  position: absolute;
+  bottom: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  right: 20px;
+  transition: 0.2s;
+}
+
+.card button:hover {
+  background-color: rgb(255, 255, 119);
 }

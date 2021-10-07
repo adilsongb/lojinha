@@ -1,0 +1,187 @@
+.container-product-details {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header-page-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.header-page-details a {
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(100, 100, 100);
+  transition: 0.2s color;
+}
+
+.header-page-details a:hover {
+  color: rgb(255, 181, 44);
+}
+
+.product-detail {
+  display: flex;
+  align-items: center;
+}
+
+.product-detail h1 {
+  font-size: 20px;
+}
+
+.cont-img {
+  background-color: grey;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 20px;
+  width: 250px;
+  height: 250px;
+}
+
+.cont-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.id-product {
+  color: gray;
+}
+
+.price {
+  font-weight: 600;
+}
+
+.button-add-cart {
+  background-color: rgb(223, 223, 219);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgb(58, 56, 56);
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.button-add-cart:hover {
+  background-color: rgb(255, 255, 119);
+}
+
+.create-comment {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.create-comment form {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.inputs-text {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  width: 60%;
+}
+
+.inputs-text input {
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+}
+
+.inputs-text input:focus {
+  border-color: rgb(231, 212, 104);
+  outline: none;
+}
+
+.inputs-text textarea {
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 5px;
+  font-family: inherit;
+  resize: vertical;
+  padding: 8px 10px;
+}
+
+.inputs-text textarea:focus {
+  border-color: rgb(231, 212, 104);
+  outline: none;
+}
+
+.avaliation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+
+.avaliation span {
+  display: block;
+  font-size: 20px;
+  color: rgb(112, 112, 112);
+  margin-bottom: 10px;
+}
+
+.avaliation label {
+  color: gray;
+}
+
+.button-avaliation {
+  background-color: rgb(223, 223, 219);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgb(58, 56, 56);
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.button-avaliation:hover {
+  background-color: rgb(255, 255, 119);
+}
+
+/* Seção de comentarios */
+.comments {
+  background-color: white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  margin-top: 15px;
+  padding: 15px 0;
+}
+
+.profile-comment span {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 150px;
+}
+
+.fa-user-circle {
+  color: rgb(170, 167, 167);
+  font-size: 60px;
+  margin-bottom: 5px;
+}
+
+.avaliation-comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.avaliation-comment span {
+  color: gray;
+}
+
+.avaliation-comment h3 {
+  color: rgb(53, 48, 48);
+  margin: 0;
+  margin-top: 10px;
+}

@@ -8,9 +8,11 @@ class CartButton extends React.Component {
     return (
       <Link
         data-testid="shopping-cart-button"
+        className="button-cart"
         to={ { pathname: '/CartPage', state: { cart } } }
       >
         <i className="fas fa-shopping-cart" />
+        { cart.length > 0 ? <span className="count-cart">{ cart.length }</span> : null }
       </Link>
     );
   }

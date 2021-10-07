@@ -7,9 +7,13 @@ export default class ProductCard extends Component {
     const { price, title, thumbnail } = this.props;
     return (
       <div className="productCard" data-testid="product">
-        <h4>{ title }</h4>
-        <img src={ thumbnail } alt={ `Imagem de ${title}` } />
-        <p>{ `R$ ${price}` }</p>
+        <div className="img-container">
+          <img src={ thumbnail } alt={ `Imagem de ${title}` } />
+        </div>
+        <div className="details-container">
+          <h4>{ title }</h4>
+          <span>{ `R$ ${price.toFixed(2)}` }</span>
+        </div>
       </div>
     );
   }

@@ -5,22 +5,21 @@ export default class ProductComments extends Component {
   render() {
     const { comment: { user, rating, commentsInput } } = this.props;
     return (
-      <section>
-        <h1>
-          Nome:
-          {' '}
-          { user }
-        </h1>
-        <h2>
-          Avaliação:
-          {' '}
-          { rating }
-        </h2>
-        <h3>
-          Comentário:
-          {' '}
-          { commentsInput }
-        </h3>
+      <section className="comments">
+        <div className="profile-comment">
+          <span>
+            <i className="fas fa-user-circle" />
+            { user }
+          </span>
+        </div>
+        <div className="avaliation-comment">
+          <span>
+            { `Avaliação: ${rating}` }
+          </span>
+          <h3>
+            <em>{ `"${commentsInput}"` }</em>
+          </h3>
+        </div>
       </section>
     );
   }

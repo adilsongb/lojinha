@@ -1,5 +1,20 @@
+html {
+  min-height: 100%;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
+  height: 100%;
+  background-color: whitesmoke;
+}
+
+.App {
+  height: 100%;
 }
 
 /* Main */
@@ -8,6 +23,7 @@ header {
   display: flex;
   justify-content: space-evenly;
   padding: 20px;
+  height: 40px;
 }
 
 header img {
@@ -62,15 +78,26 @@ header form button:hover {
   background-color: rgb(255, 255, 168);
 }
 
-header a {
+.button-cart {
   color: rgb(65, 65, 65);
   font-size: 20px;
   text-decoration: none;
   transition: 0.2s color;
+  position: relative;
 }
 
-header a i {
+.button-cart i {
   margin-top: 8px;
+}
+
+.count-cart {
+  background-color: white;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
 }
 
 /* Main */
@@ -89,13 +116,15 @@ main {
 .categories {
   box-sizing: border-box;
   padding: 15px;
-  width: 20%;
+  width: 30%;
 }
 
 .search-results {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  width: 80%;
+  width: 70%;
+  position: relative;
 }
 
 .categories h4 {
@@ -104,11 +133,84 @@ main {
 
 .categories button:hover {
   color: black;
-  font-size: 16px;
-  margin-bottom: 8.1px;
+  font-size: 15px;
 }
 
 .search-results h1 {
   text-align: center;
   width: 100%;
+}
+
+/* Animation Loading */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+  position: absolute;
+  width: 100%;
+  height: 40%;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(255, 222, 75) transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  header {
+    justify-content: space-around;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .categories {
+    width: 25%;
+  }
+  
+  .search-results {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 75%;
+    position: relative;
+  }
 }

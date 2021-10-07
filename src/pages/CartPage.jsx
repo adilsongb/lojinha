@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
+import './CartPage.css';
 
 class CartPage extends React.Component {
   constructor() {
@@ -88,9 +89,15 @@ class CartPage extends React.Component {
   render() {
     const { cart, noRepeatCart, totalPrice } = this.state;
     return (
-      <div>
-        <Link to="/">Voltar</Link>
-        <h2>Carrinho de Compras</h2>
+      <div className="container-cart-page">
+        <Link to="/">
+          <i className="fas fa-arrow-left" />
+          Voltar
+        </Link>
+        <h2>
+          <i className="fas fa-shopping-cart" />
+          Carrinho de Compras
+        </h2>
         { noRepeatCart.length > 0
           ? noRepeatCart.map((product) => (
             <CartProduct
@@ -102,8 +109,19 @@ class CartPage extends React.Component {
               removeProduct={ this.removeProduct }
             />
           ))
-          : <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3> }
-        <h3>{`Total a pagar: R$ ${totalPrice}`}</h3>
+          : (
+            <h3 data-testid="shopping-cart-empty-message">
+              Seu carrinho está vazio
+            </h3>) }
+
+        <div className="end-cart">
+          <h3 className="total-price-cart">
+            {`Valor Total da Compra: R$ ${totalPrice}`}
+          </h3>
+          <button type="button" className="finalization-button">
+            Finalizar Compra
+          </button>
+        </div>
       </div>
     );
   }
